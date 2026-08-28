@@ -148,8 +148,15 @@ function render(){
     </div>`;
 
   /* --- padel --- */
-  const teseLink = PROFILE.teseUrl
-    ? `<p><a class="btn" href="${PROFILE.teseUrl}" target="_blank" rel="noopener">${esc(t.padel_tese)}</a></p>` : "";
+  const teseBloco = PROFILE.teseTitulo ? `
+      <div class="tese">
+        <div class="tese__k">${esc(t.padel_tese_kicker)}</div>
+        <h4>“${esc(PROFILE.teseTitulo)}”</h4>
+        <div class="tese__btns">
+          ${PROFILE.teseUrl ? `<a class="btn" href="${PROFILE.teseUrl}" target="_blank" rel="noopener">${esc(t.padel_tese)}</a>` : ""}
+          ${PROFILE.tesePdf ? `<a class="btn" href="${PROFILE.tesePdf}" target="_blank" rel="noopener">${esc(t.padel_tese_pdf)}</a>` : ""}
+        </div>
+      </div>` : "";
   $("#padel").innerHTML = `
     <div class="wrap">
       <div class="sec-head rv">
@@ -160,8 +167,9 @@ function render(){
         <div class="rv">
           <p>${esc(t.padel_p1)}</p>
           <p>${esc(t.padel_p2)}</p>
+          ${teseBloco}
+          <p>${esc(t.padel_dados)}</p>
           <p>${esc(t.padel_p3)}</p>
-          ${teseLink}
           <div class="badges">
             <span class="badge">${esc(t.padel_badge_1)}</span>
             <span class="badge">${esc(t.padel_badge_2)}</span>
@@ -228,7 +236,15 @@ function render(){
         <h2>${esc(t.sec_off)}</h2>
       </div>
       <div class="split split--rev">
-        <div class="split__media rv"><div class="frame">${foto(PROFILE.fotoMusica, "Rockin'1000", t.off_foto_ph)}</div></div>
+        <div class="rv">
+          <div class="gal">
+            ${GALERIA.map(g => `
+              <figure class="${g.classe}">
+                <img src="${esc(g.src)}" alt="${esc(t[g.chave])}" loading="lazy">
+                <figcaption>${esc(t[g.chave])}</figcaption>
+              </figure>`).join("")}
+          </div>
+        </div>
         <div class="rv">
           <h3>${esc(t.off_h)}</h3>
           <p>${esc(t.off_p1)}</p>

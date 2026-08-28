@@ -15,14 +15,24 @@ const PROFILE = {
   // Larga o ficheiro em assets/img/ com este nome exato (ou muda o caminho).
   foto: "assets/img/perfil.jpg",
   fotoPadel: "assets/img/padel.jpg",
-  fotoMusica: "assets/img/rockin1000.jpg",
-  // Deixa a null enquanto não tiveres o PDF em assets/docs/tese.pdf
-  tesePdf: null,
-  // Tese de mestrado — repositório RCAAP
+
+  // Tese de mestrado — IPAM Porto
+  teseTitulo: "Análise dos Motivos de Prática Desportiva e do Nível de Satisfação Intrínseca do Consumidor de Padel Português",
+  teseInstituicao: "IPAM — Instituto Português de Administração de Marketing, Porto",
   teseUrl: "https://comum.rcaap.pt/entities/publication/fba10b16-0315-412e-97c7-863eba6212d1",
-  // Põe aqui o título exato da tese quando o confirmares (fica null = usa texto genérico)
-  teseTitulo: null
+  tesePdf: "assets/docs/tese.pdf"
 };
+
+/* ---- Galeria "Fora do campo" — Rockin'1000, Estádio de Leiria ---- */
+const GALERIA = [
+  { src: "assets/img/rockin-founder.jpg", classe: "g-tall2", chave: "gal_founder" },
+  { src: "assets/img/rockin-estadio.jpg", classe: "",        chave: "gal_estadio" },
+  { src: "assets/img/rockin-noite.jpg",   classe: "",        chave: "gal_noite"   }
+  // rockin-palco.jpg está fora: é uma captura de ecrã, tem as riscas e as
+  // setas do visualizador por cima. Se arranjares o original limpo, mete-o
+  // com o mesmo nome e acrescenta aqui:
+  // ,{ src: "assets/img/rockin-palco.jpg", classe: "", chave: "gal_palco" }
+];
 
 /* ---------- Números do hero (contadores animados) ---------- */
 const STATS = [

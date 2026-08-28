@@ -37,21 +37,28 @@ npx http-server -p 8080     # depois abre http://localhost:8080
 
 ## O que falta pores
 
-### 1. Fotografias — `assets/img/`
+### 1. Fotografias — `assets/img/` ✅ feito
 
-Enquanto não existirem, aparece um retângulo tracejado a dizer onde falta o ficheiro.
+As fotos que enviaste já estão no sítio, redimensionadas para web
+(8,5 MB → 1,1 MB no total):
 
-| Ficheiro | O que é |
+| Ficheiro | Origem |
 |---|---|
-| `assets/img/perfil.jpg` | Retrato (quadrado, mín. 800×800) |
-| `assets/img/padel.jpg` | Tu em campo (vertical 4:5) |
-| `assets/img/rockin1000.jpg` | Rockin'1000 (vertical 4:5) |
+| `perfil.jpg` | Foto Tipo Passe |
+| `padel.jpg` | Padel Photo |
+| `rockin-estadio.jpg` | Estádio Leiria rockin 1000 |
+| `rockin-founder.jpg` | Rockin 1000 founder |
+| `rockin-palco.jpg` | Rockin photo |
+| `rockin-noite.jpg` | rockin1000 photos |
 
-### 2. Tese
+Para trocar uma foto, substitui o ficheiro mantendo o nome. Se alguma
+desaparecer, aparece um retângulo tracejado em vez de uma imagem partida.
 
-O link para o RCAAP já está ligado. Se quiseres o título exato no texto,
-preenche `teseTitulo` em `assets/js/data.js`.
-Se tiveres o PDF, mete-o em `assets/docs/tese.pdf`.
+### 2. Tese ✅ feito
+
+O PDF está em `assets/docs/tese.pdf` e o título e link do RCAAP estão no
+`data.js`. A secção do padel mostra os dois botões: ler no RCAAP e
+descarregar o PDF.
 
 ### 3. Logótipos das marcas — `assets/logos/` (opcional)
 
