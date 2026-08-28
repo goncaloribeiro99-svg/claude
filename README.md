@@ -17,13 +17,46 @@ Um único site. A empresa é escolhida pelo link que envias:
 | VOLT Padel | `.../index.html?e=volt` |
 | Genérico | `.../index.html` |
 
-Cada versão muda: a cor de destaque, o nome no topo, a secção **"Porquê eu, porquê aqui"**,
+Cada versão muda a cor de destaque, o nome no topo, a secção **"Porquê eu, porquê aqui"**,
 o **plano dos primeiros 90 dias** e o assunto do email do botão de contacto.
 
 Podes forçar o idioma inicial: `?e=volt&lang=en` (`pt`, `en`, `es`).
-Sem esse parâmetro, **arranca sempre em português** — o botão do topo troca a qualquer momento.
+Sem esse parâmetro **arranca sempre em português** — o botão do topo troca a qualquer momento.
 
----
+## A linguagem visual
+
+Ficha técnica. Cada secção é uma **chapa** numerada, com carril de navegação à esquerda,
+linhas de cota e a grelha de furos da face da pala como textura. Archivo em largura
+expandida nos títulos, Newsreader serifada nos argumentos, IBM Plex Mono nas etiquetas.
+Dois temas — papel de projeto claro e chão de fábrica escuro — que seguem a preferência
+de quem abre. O acento vem da empresa (`accent` / `accent2` em `data.js`).
+
+### Animações, uma por chapa
+
+| Chapa | O que faz |
+|---|---|
+| Capa | Grelha de furos que reage ao cursor; sem rato respira sozinha. Nome sobe por trás de uma máscara. |
+| Ficha | Contadores a subir com uma linha a varrer por baixo. |
+| Argumento | O primeiro parágrafo **acende palavra a palavra** conforme rolas. |
+| Percurso | A régua desenha-se ao ritmo do scroll; marcadores saltam. |
+| Padel | O cartão da tese imprime-se pela lateral. |
+| Plano | **Secção fixada**: o painel prende-se ao ecrã e as três fases trocam. |
+| Prova | Cartões inclinam-se em 3D na direção do cursor. |
+| Fora do campo | Fotos revelam-se em cascata, com parallax nas molduras. |
+
+Com `prefers-reduced-motion` ativo tudo isto desliga e a página fica estática e legível.
+
+## Build de ficheiro único
+
+Para partilhar um preview sem alojamento, ou para percorrer as quatro versões
+de uma vez:
+
+```bash
+node build/build-single.js     # -> dist/preview.html
+```
+
+Junta CSS, JS e imagens (em data URI) num só ficheiro e acrescenta um seletor
+de empresa no canto. É só isso que o `dist/` contém — o site a sério é o `index.html`.
 
 ## Ver o site localmente
 

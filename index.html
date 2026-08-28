@@ -3,50 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#00E5A0">
+<meta name="theme-color" content="#131210">
 <title>Gonçalo Ribeiro — Candidatura</title>
-<meta name="description" content="Gonçalo Ribeiro — Marketing Manager & Content. Candidatura para marcas de padel portuguesas.">
-
+<meta name="description" content="Gonçalo Ribeiro — Marketing Manager e criador de conteúdo. Candidatura às marcas portuguesas de padel.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Gonçalo Ribeiro — Marketing & Padel">
-<meta property="og:description" content="Três anos a construir operações de marketing do zero. Jogador de padel federado desde 2020.">
+<meta property="og:title" content="Gonçalo Ribeiro — Marketing &amp; Padel">
+<meta property="og:description" content="Três anos a montar operações de marketing do zero. Jogador de padel federado desde 2020.">
 <meta property="og:image" content="assets/img/perfil.jpg">
-
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23131210'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial' font-size='17' font-weight='900' text-anchor='middle' fill='%23D2A24E'%3EG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2308080A'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial' font-size='17' font-weight='900' text-anchor='middle' fill='%2300E5A0'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300..600&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<div id="progress"></div>
+<div id="bar"></div>
+<div id="ring" aria-hidden="true"></div>
 
-<header class="topbar" id="topbar">
-  <div class="topbar__id" id="topbarId"></div>
-  <div class="topbar__right">
+<header class="top" id="top">
+  <div class="top__id" id="topId"></div>
+  <div class="top__r">
     <div class="langs" id="langs" role="group" aria-label="Idioma">
       <button data-lang="pt" aria-pressed="true">PT</button>
       <button data-lang="en" aria-pressed="false">EN</button>
       <button data-lang="es" aria-pressed="false">ES</button>
     </div>
-    <a class="btn btn--fill" id="ctaTop" href="#contacto"></a>
+    <a class="btn btn--solid" id="topCta" href="#p9"></a>
   </div>
 </header>
 
-<main>
-  <section class="hero" id="hero"></section>
-  <div class="marquee" id="marquee"></div>
-  <section style="padding-top:70px;padding-bottom:0"><div class="wrap"><div class="stats" id="stats"></div></div></section>
-  <section id="why"></section>
-  <section id="percurso" style="background:var(--bg-2)"></section>
-  <section id="padel"></section>
-  <section id="prova" style="background:var(--bg-2)"></section>
-  <section id="plano"></section>
-  <section id="tools" style="background:var(--bg-2)"></section>
-  <section id="off"></section>
-  <section class="contact" id="contacto"></section>
-</main>
+<nav class="rail" id="rail" aria-label="Secções"></nav>
+
+<main id="main"></main>
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/i18n.js"></script>

@@ -5,6 +5,16 @@
 const I18N = {
   pt: {
     htmlLang: "pt",
+    chapa: "Chapa",
+    rolar: "Rolar",
+    plates: { capa:"Capa", ficha:"Ficha", argumento:"Argumento", percurso:"Percurso", padel:"Padel",
+              plano:"Plano", prova:"Prova", ferramentas:"Ferramentas", fora:"Fora do campo", contacto:"Contacto" },
+    sec_ficha: "Os números primeiro",
+    sec_ficha_sub: "Sem adjetivos. O que está medido, e onde foi medido.",
+    sec_off_h2: "Mil músicos, um estádio",
+    sec_plano_h2: "Os primeiros 90 dias na {empresa}",
+    troca_empresa: "Empresa",
+    troca_idioma: "Idioma",
     candidatura: "Candidatura",
     nav: { why:"Porquê eu", percurso:"Percurso", padel:"Padel", prova:"Prova", plano:"90 dias", contacto:"Contacto" },
 
@@ -76,6 +86,16 @@ const I18N = {
 
   en: {
     htmlLang: "en",
+    chapa: "Plate",
+    rolar: "Scroll",
+    plates: { capa:"Cover", ficha:"Record", argumento:"Argument", percurso:"Track record", padel:"Padel",
+              plano:"Plan", prova:"Proof", ferramentas:"Tools", fora:"Off the court", contacto:"Contact" },
+    sec_ficha: "The numbers first",
+    sec_ficha_sub: "No adjectives. What is measured, and where it was measured.",
+    sec_off_h2: "A thousand musicians, one stadium",
+    sec_plano_h2: "The first 90 days at {empresa}",
+    troca_empresa: "Company",
+    troca_idioma: "Language",
     candidatura: "Application",
     nav: { why:"Why me", percurso:"Track record", padel:"Padel", prova:"Proof", plano:"90 days", contacto:"Contact" },
 
@@ -147,6 +167,16 @@ const I18N = {
 
   es: {
     htmlLang: "es",
+    chapa: "Lámina",
+    rolar: "Desplazar",
+    plates: { capa:"Portada", ficha:"Ficha", argumento:"Argumento", percurso:"Trayectoria", padel:"Pádel",
+              plano:"Plan", prova:"Pruebas", ferramentas:"Herramientas", fora:"Fuera de la pista", contacto:"Contacto" },
+    sec_ficha: "Los números primero",
+    sec_ficha_sub: "Sin adjetivos. Lo que está medido, y dónde se midió.",
+    sec_off_h2: "Mil músicos, un estadio",
+    sec_plano_h2: "Los primeros 90 días en {empresa}",
+    troca_empresa: "Empresa",
+    troca_idioma: "Idioma",
     candidatura: "Candidatura",
     nav: { why:"Por qué yo", percurso:"Trayectoria", padel:"Pádel", prova:"Pruebas", plano:"90 días", contacto:"Contacto" },
 
