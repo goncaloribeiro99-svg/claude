@@ -1,0 +1,200 @@
+/* =========================================================================
+   i18n.js — textos da interface em PT / EN / ES
+   ========================================================================= */
+
+const I18N = {
+  pt: {
+    htmlLang: "pt",
+    candidatura: "Candidatura",
+    nav: { why:"Porquê eu", percurso:"Percurso", padel:"Padel", prova:"Prova", plano:"90 dias", contacto:"Contacto" },
+
+    hero_kicker: "Candidatura espontânea · {empresa}",
+    hero_role: "Marketing Manager & Content. Três anos a construir operações de marketing do zero — e jogador de padel federado desde 2020.",
+    hero_meta_local: "Porto, Portugal",
+    hero_meta_desloc: "Disponível para deslocação no país",
+    hero_meta_idade: "26 anos",
+    hero_cta_falar: "Falar comigo",
+    hero_cta_linkedin: "LinkedIn",
+    hero_cta_pdf: "Guardar em PDF",
+    hero_quote: "It always seems impossible until it's done.",
+    hero_quote_autor: "Nelson Mandela",
+    hero_foto_ph: "Coloca a tua foto em<br>assets/img/perfil.jpg",
+
+    marquee: ["Marketing","Padel","Conteúdo","Vídeo","Meta Ads","Eventos","Go-to-market","PT · EN · ES"],
+
+    stat_views: "views no vídeo com melhor desempenho",
+    stat_padelhome: "views num vídeo da Padel Home — conta com 1 mês",
+    stat_anos: "anos a liderar marketing",
+    stat_idiomas: "idiomas de trabalho: PT, EN, ES",
+    stat_padel: "ano em que comecei a jogar padel",
+
+    sec_why: "Porquê eu, porquê aqui",
+    sec_why_sub: "Esta secção foi escrita para {empresa}. Não é o mesmo texto que enviei a mais alguém.",
+    sec_percurso: "Percurso",
+    sec_percurso_sub: "Cinco anos de marketing, com os dois últimos dentro do padel.",
+    sec_padel: "O padel não é o hobby do CV",
+    sec_prova: "Prova de trabalho",
+    sec_prova_sub: "Números, não adjetivos.",
+    sec_plano: "Os primeiros 90 dias",
+    sec_plano_sub: "O que eu faria na {empresa}, por ordem.",
+    sec_tools: "Ferramentas",
+    sec_off: "Fora do campo",
+    sec_contacto: "Vamos falar",
+
+    padel_p1: "Jogo padel desde 2020. Sou federado M5 e M4 em torneios sociais — o suficiente para perceber o jogo de dentro, e o suficiente para saber que não sou profissional.",
+    padel_p2: "A minha tese de mestrado foi das primeiras em Portugal a cruzar marketing e padel, à data em que foi realizada. Está publicada e é pública.",
+    padel_p3: "Entre a Padel Nuestro Portugal e a Padel Home, os últimos dois anos foram passados a fazer conteúdo para esta modalidade. Sei o que faz um jogador parar o scroll porque eu paro no mesmo sítio.",
+    padel_tese: "Ver a tese no RCAAP",
+    padel_badge_1: "Federado M5",
+    padel_badge_2: "M4 social",
+    padel_badge_3: "A jogar desde 2020",
+    padel_foto_ph: "Foto tua em campo em<br>assets/img/padel.jpg",
+
+    off_h: "Canto. E atirei-me para a maior produção musical do país.",
+    off_p1: "Fora do trabalho, a música é o que me puxa. Cantar é das coisas de que mais gosto.",
+    off_p2: "Em 2025 meti-me no Rockin'1000 — mil músicos a tocar ao mesmo tempo, no Estádio Municipal de Leiria. A maior produção musical que houve em Portugal nesse ano.",
+    off_p3: "Ponho isto no CV pela mesma razão que ponho o padel: aprende-se mais sobre produção, logística e público a estar dentro de um estádio com mil pessoas do que num slide.",
+    off_foto_ph: "Foto do Rockin'1000 em<br>assets/img/rockin1000.jpg",
+
+    prova_1: "views no vídeo que melhor correu. Formato pensado para o algoritmo, não para o cliente interno.",
+    prova_2: "views num vídeo da Padel Home com a conta a ter apenas 1 mês de vida. Presença construída do zero.",
+    prova_3: "Conteúdo de loja para o maior retalhista de padel do mundo, em Portugal. Vê um exemplo.",
+    prova_ver: "Ver",
+
+    contacto_p: "Se isto fizer sentido, respondo no próprio dia. Se não fizer, agradeço na mesma o scroll até aqui.",
+    contacto_wpp: "WhatsApp",
+    contacto_ig: "Instagram da academia",
+    footer_feito: "Site feito por mim, à medida da {empresa}.",
+    footer_ano: "Porto · 2026"
+  },
+
+  en: {
+    htmlLang: "en",
+    candidatura: "Application",
+    nav: { why:"Why me", percurso:"Track record", padel:"Padel", prova:"Proof", plano:"90 days", contacto:"Contact" },
+
+    hero_kicker: "Speculative application · {empresa}",
+    hero_role: "Marketing Manager & Content. Three years building marketing operations from zero — and a federated padel player since 2020.",
+    hero_meta_local: "Porto, Portugal",
+    hero_meta_desloc: "Available to travel nationwide",
+    hero_meta_idade: "26 years old",
+    hero_cta_falar: "Get in touch",
+    hero_cta_linkedin: "LinkedIn",
+    hero_cta_pdf: "Save as PDF",
+    hero_quote: "It always seems impossible until it's done.",
+    hero_quote_autor: "Nelson Mandela",
+    hero_foto_ph: "Drop your photo at<br>assets/img/perfil.jpg",
+
+    marquee: ["Marketing","Padel","Content","Video","Meta Ads","Events","Go-to-market","PT · EN · ES"],
+
+    stat_views: "views on my best-performing video",
+    stat_padelhome: "views on a Padel Home video — account 1 month old",
+    stat_anos: "years leading marketing",
+    stat_idiomas: "working languages: PT, EN, ES",
+    stat_padel: "the year I started playing padel",
+
+    sec_why: "Why me, why here",
+    sec_why_sub: "This section was written for {empresa}. It is not the same text I sent anyone else.",
+    sec_percurso: "Track record",
+    sec_percurso_sub: "Five years in marketing, the last two inside padel.",
+    sec_padel: "Padel is not the hobby line on the CV",
+    sec_prova: "Proof of work",
+    sec_prova_sub: "Numbers, not adjectives.",
+    sec_plano: "The first 90 days",
+    sec_plano_sub: "What I would do at {empresa}, in order.",
+    sec_tools: "Tools",
+    sec_off: "Off the court",
+    sec_contacto: "Let's talk",
+
+    padel_p1: "I have played padel since 2020. Federated M5 and M4 in social tournaments — enough to understand the game from the inside, and enough to know I am not a professional.",
+    padel_p2: "My master's thesis was among the first in Portugal to cross marketing and padel, at the time it was written. It is published and public.",
+    padel_p3: "Between Padel Nuestro Portugal and Padel Home, the last two years were spent making content for this sport. I know what makes a player stop scrolling because I stop in the same place.",
+    padel_tese: "Read the thesis on RCAAP",
+    padel_badge_1: "Federated M5",
+    padel_badge_2: "M4 social",
+    padel_badge_3: "Playing since 2020",
+    padel_foto_ph: "Your on-court photo at<br>assets/img/padel.jpg",
+
+    off_h: "I sing. And I threw myself into the country's biggest music production.",
+    off_p1: "Outside work, music is what pulls me. Singing is one of my favourite things to do.",
+    off_p2: "In 2025 I joined Rockin'1000 — a thousand musicians playing at once at the Leiria Municipal Stadium. The largest music production held in Portugal that year.",
+    off_p3: "It is on this CV for the same reason padel is: you learn more about production, logistics and audiences standing in a stadium with a thousand people than you do in a slide.",
+    off_foto_ph: "Rockin'1000 photo at<br>assets/img/rockin1000.jpg",
+
+    prova_1: "views on my best-performing video. A format built for the algorithm, not for the internal client.",
+    prova_2: "views on a Padel Home video with the account only 1 month old. Presence built from scratch.",
+    prova_3: "Store content for the world's largest padel retailer, in Portugal. See an example.",
+    prova_ver: "View",
+
+    contacto_p: "If this makes sense, I reply the same day. If it does not, thank you for scrolling this far anyway.",
+    contacto_wpp: "WhatsApp",
+    contacto_ig: "Academy Instagram",
+    footer_feito: "Site built by me, tailored to {empresa}.",
+    footer_ano: "Porto · 2026"
+  },
+
+  es: {
+    htmlLang: "es",
+    candidatura: "Candidatura",
+    nav: { why:"Por qué yo", percurso:"Trayectoria", padel:"Pádel", prova:"Pruebas", plano:"90 días", contacto:"Contacto" },
+
+    hero_kicker: "Candidatura espontánea · {empresa}",
+    hero_role: "Marketing Manager & Content. Tres años montando operaciones de marketing desde cero — y jugador de pádel federado desde 2020.",
+    hero_meta_local: "Oporto, Portugal",
+    hero_meta_desloc: "Disponible para viajar por el país",
+    hero_meta_idade: "26 años",
+    hero_cta_falar: "Hablemos",
+    hero_cta_linkedin: "LinkedIn",
+    hero_cta_pdf: "Guardar en PDF",
+    hero_quote: "It always seems impossible until it's done.",
+    hero_quote_autor: "Nelson Mandela",
+    hero_foto_ph: "Pon tu foto en<br>assets/img/perfil.jpg",
+
+    marquee: ["Marketing","Pádel","Contenido","Vídeo","Meta Ads","Eventos","Go-to-market","PT · EN · ES"],
+
+    stat_views: "visualizaciones en mi vídeo con mejor rendimiento",
+    stat_padelhome: "visualizaciones en un vídeo de Padel Home — cuenta de 1 mes",
+    stat_anos: "años liderando marketing",
+    stat_idiomas: "idiomas de trabajo: PT, EN, ES",
+    stat_padel: "año en que empecé a jugar al pádel",
+
+    sec_why: "Por qué yo, por qué aquí",
+    sec_why_sub: "Esta sección fue escrita para {empresa}. No es el mismo texto que envié a nadie más.",
+    sec_percurso: "Trayectoria",
+    sec_percurso_sub: "Cinco años de marketing, los dos últimos dentro del pádel.",
+    sec_padel: "El pádel no es el hobby del CV",
+    sec_prova: "Pruebas de trabajo",
+    sec_prova_sub: "Números, no adjetivos.",
+    sec_plano: "Los primeros 90 días",
+    sec_plano_sub: "Lo que haría en {empresa}, por orden.",
+    sec_tools: "Herramientas",
+    sec_off: "Fuera de la pista",
+    sec_contacto: "Hablemos",
+
+    padel_p1: "Juego al pádel desde 2020. Federado M5 y M4 en torneos sociales — suficiente para entender el juego desde dentro, y suficiente para saber que no soy profesional.",
+    padel_p2: "Mi tesis de máster fue de las primeras en Portugal en cruzar marketing y pádel, en la fecha en que se realizó. Está publicada y es pública.",
+    padel_p3: "Entre Padel Nuestro Portugal y Padel Home, los dos últimos años los pasé haciendo contenido para este deporte. Sé qué hace que un jugador pare el scroll porque yo paro en el mismo sitio.",
+    padel_tese: "Ver la tesis en RCAAP",
+    padel_badge_1: "Federado M5",
+    padel_badge_2: "M4 social",
+    padel_badge_3: "Jugando desde 2020",
+    padel_foto_ph: "Tu foto en pista en<br>assets/img/padel.jpg",
+
+    off_h: "Canto. Y me lancé a la mayor producción musical del país.",
+    off_p1: "Fuera del trabajo, la música es lo que me tira. Cantar es de las cosas que más me gustan.",
+    off_p2: "En 2025 me metí en Rockin'1000 — mil músicos tocando a la vez en el Estadio Municipal de Leiria. La mayor producción musical que hubo en Portugal ese año.",
+    off_p3: "Está en este CV por la misma razón que el pádel: se aprende más sobre producción, logística y público dentro de un estadio con mil personas que en una diapositiva.",
+    off_foto_ph: "Foto del Rockin'1000 en<br>assets/img/rockin1000.jpg",
+
+    prova_1: "visualizaciones en el vídeo que mejor funcionó. Formato pensado para el algoritmo, no para el cliente interno.",
+    prova_2: "visualizaciones en un vídeo de Padel Home con la cuenta con solo 1 mes de vida. Presencia construida desde cero.",
+    prova_3: "Contenido de tienda para el mayor retailer de pádel del mundo, en Portugal. Mira un ejemplo.",
+    prova_ver: "Ver",
+
+    contacto_p: "Si esto tiene sentido, respondo el mismo día. Si no, gracias igualmente por llegar hasta aquí.",
+    contacto_wpp: "WhatsApp",
+    contacto_ig: "Instagram de la academia",
+    footer_feito: "Web hecha por mí, a medida de {empresa}.",
+    footer_ano: "Oporto · 2026"
+  }
+};

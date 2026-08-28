@@ -1,0 +1,1 @@
+Logotipos das marcas, se e quando os tiveres. Preenche depois "logo:" em assets/js/data.js
