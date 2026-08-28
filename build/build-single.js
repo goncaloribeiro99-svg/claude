@@ -76,13 +76,17 @@ const IMGS = {
   const html = R("index.html");
   const head = html.split("<head>")[1].split("</head>")[0];
   const keep = head.split("\n")
-    .filter(l => /<title>|fonts\.googleapis|preconnect|rel="icon"/.test(l))
+    .filter(l => /fonts\.googleapis|preconnect|rel="icon"/.test(l))
     .join("\n");
+  // no ficheiro único o título nomeia o preview; o main.js reescreve-o
+  // por empresa assim que arranca
+  const titulo = "<title>Quatro Marcas, Um Currículo</title>";
   const body = html.split("<body>")[1].split("</body>")[0]
     .replace(/<script src="assets\/js\/[^"]+"><\/script>/g, "")
     .trim();
 
   const out = [
+    titulo,
     keep,
     "<style>\n" + R("assets/css/style.css") + "\n</style>",
     body,
