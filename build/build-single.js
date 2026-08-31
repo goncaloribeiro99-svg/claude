@@ -69,7 +69,7 @@ const IMGS = {
     if(b){ window.__cv.setEmpresa(b.dataset.e); pinta(); }
   });
   document.getElementById("langs").addEventListener("click", function(){ setTimeout(pinta, 0); });
-  window.addEventListener("DOMContentLoaded", function(){ window.__cv.setEmpresa("quad"); pinta(); });
+  window.addEventListener("DOMContentLoaded", function(){ window.__cv.setEmpresa("default"); pinta(); });
 })();
 <\/script>`;
 

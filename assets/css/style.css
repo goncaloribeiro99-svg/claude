@@ -246,7 +246,20 @@ img{display:block;max-width:100%}
 /* ===================== PLANO (fixado) ===================== */
 .pin{position:relative;padding:0;border-top:1px solid var(--line-2)}
 .pin__track{position:relative}
-.pin__stage{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;padding:90px 0}
+.pin__stage{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;padding:56px 0}
+/* Quando os painéis não cabem no ecrã fixado (ecrã estreito, ecrã baixo,
+   ou movimento reduzido) a fixação desliga e eles empilham, todos legíveis.
+   O main.js mede a altura e aplica .pin--flat; a media query é a rede de
+   segurança para quando o JS ainda não correu. */
+.pin--flat .pin__stage{position:static;min-height:0;padding:74px 0}
+.pin--flat .stage__num,.pin--flat .pin__bar{display:none}
+.pin--flat .step{opacity:1}
+@media(max-width:860px){
+  .pin__stage{position:static;min-height:0;padding:74px 0}
+  .stage__num{display:none}
+  .step{opacity:1}
+  .pin__bar{display:none}
+}
 .stage{display:grid;gap:clamp(26px,4vw,60px);grid-template-columns:1fr;align-items:center;width:100%}
 .stage > *{min-width:0}
 @media(min-width:900px){.stage{grid-template-columns:.85fr 1.15fr}}
@@ -259,14 +272,14 @@ img{display:block;max-width:100%}
 }
 .stage__num b.on{opacity:1;transform:none}
 .steps{position:relative}
-.step{opacity:.24;transition:opacity .5s ease;padding:20px 0;border-top:1px solid var(--line-2)}
+.step{opacity:.24;transition:opacity .5s ease;padding:15px 0;border-top:1px solid var(--line-2)}
 .step.on{opacity:1}
 .step__d{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:9px}
-.step h3{font-size:clamp(1.35rem,2.9vw,2.05rem);margin-bottom:14px}
-.step ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.step h3{font-size:clamp(1.3rem,2.6vw,1.85rem);margin-bottom:10px}
+.step ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
 .step li{position:relative;padding-left:20px;color:var(--ink-2);font-size:.99rem}
 .step li::before{content:"";position:absolute;left:0;top:.72em;width:9px;height:1px;background:var(--accent)}
-.pin__bar{height:1px;background:var(--line);margin-top:30px;position:relative}
+.pin__bar{height:1px;background:var(--line);margin-top:22px;position:relative}
 .pin__bar i{position:absolute;left:0;top:0;height:1px;width:0;background:var(--accent);display:block}
 
 /* ===================== PROVA ===================== */
@@ -332,6 +345,9 @@ img{display:block;max-width:100%}
 @media (pointer:coarse){#ring{display:none}}
 
 @media (prefers-reduced-motion: reduce){
+  /* sem fixação os três algarismos absolutos sobrepunham-se: escondem-se */
+  .pin__stage{position:static;min-height:0;padding:74px 0}
+  .stage__num,.pin__bar{display:none}
   .rv,.gal figure,.gal.on figure,.step,.stage__num b,.job__dot,.tese::before{
     opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
   .cue i{animation:none}

@@ -48,7 +48,7 @@ function num(i){ return (i<10?"0":"") + i; }
 function cabeca(i, key, titulo, sub){
   var t = I18N[lang];
   return '<div class="ph rv">'
-    + '<div class="ph__tag" data-scramble>' + esc(t.chapa) + " " + num(i) + " — " + esc(t.plates[key]) + '</div>'
+    + '<div class="ph__tag" data-scramble>' + esc(t.chapa) + " " + num(i) + " · " + esc(t.plates[key]) + '</div>'
     + '<h2>' + esc(titulo) + '</h2>'
     + (sub ? '<p class="ph__sub">' + esc(sub) + '</p>' : '')
     + '</div>';
@@ -67,7 +67,8 @@ function render(){
   $$("#langs button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
 
   $("#rail").innerHTML = PLATES.map(function(k,i){
-    return '<a href="#p' + i + '" data-r="p' + i + '">' + num(i) + " · " + esc(t.plates[k]).toUpperCase() + '</a>';
+    var etiqueta = (k === "plano" && EMPRESA.generica) ? t.plates.competencias : t.plates[k];
+    return '<a href="#p' + i + '" data-r="p' + i + '">' + num(i) + " · " + esc(etiqueta).toUpperCase() + '</a>';
   }).join("");
 
   var H = [];
@@ -77,7 +78,7 @@ function render(){
     + '<canvas id="grid" aria-hidden="true"></canvas>'
     + '<div class="shell hero__in">'
       + '<div>'
-        + '<div class="eyebrow rv">' + esc(comEmpresa(t.hero_kicker)) + '</div>'
+        + '<div class="eyebrow rv">' + esc(EMPRESA.generica ? t.hero_kicker_gen : comEmpresa(t.hero_kicker)) + '</div>'
         + '<h1 class="name"><span class="ln"><i>Gonçalo</i></span><span class="ln"><i class="thin">Ribeiro</i></span></h1>'
         + '<p class="lede rv" data-d="2">' + esc(t.hero_role) + '</p>'
         + '<div class="hero__cta rv" data-d="3">'
@@ -107,7 +108,7 @@ function render(){
 
   /* ---- 02 argumento (o 1.º parágrafo acende palavra a palavra) ---- */
   H.push('<section class="plate" id="p2"><div class="shell">'
-    + cabeca(2, "argumento", comEmpresa(t.sec_why), comEmpresa(t.sec_why_sub))
+    + cabeca(2, "argumento", t.sec_why, EMPRESA.generica ? "" : comEmpresa(t.sec_why_sub))
     + '<h3 class="claim rv">' + esc(p.titulo) + '</h3>'
     + '<div class="body">'
     + p.paras.map(function(x,i){
@@ -154,6 +155,7 @@ function render(){
       + '<div class="body" style="max-width:60ch">'
         + '<p class="rv">' + esc(t.padel_p1) + '</p>'
         + '<p class="rv" data-d="1">' + esc(t.padel_p2) + '</p>'
+        + '<p class="rv" data-d="2">' + esc(t.padel_p3b) + '</p>'
       + '</div>'
       + tese
       + '<div class="body" style="max-width:60ch"><p class="rv">' + esc(t.padel_dados) + '</p>'
@@ -170,8 +172,10 @@ function render(){
   H.push('<section class="pin" id="p5"><div class="pin__track" id="track"><div class="pin__stage">'
     + '<div class="shell" style="width:100%">'
       + '<div class="ph" style="margin-bottom:32px">'
-        + '<div class="ph__tag" data-scramble>' + esc(t.chapa) + ' 05 — ' + esc(t.plates.plano) + '</div>'
-        + '<h2 style="font-size:clamp(1.8rem,4.2vw,3rem)">' + esc(comEmpresa(t.sec_plano_h2)) + '</h2>'
+        + '<div class="ph__tag" data-scramble>' + esc(t.chapa) + ' 05 · '
+          + esc(EMPRESA.generica ? t.plates.competencias : t.plates.plano) + '</div>'
+        + '<h2 style="font-size:clamp(1.8rem,4.2vw,3rem)">'
+          + esc(EMPRESA.generica ? t.sec_comp_h2 : comEmpresa(t.sec_plano_h2)) + '</h2>'
       + '</div>'
       + '<div class="stage">'
         + '<div class="stage__num" id="nums">'
@@ -239,7 +243,7 @@ function render(){
       + '<a class="btn" href="' + PROFILE.instagramAcademia + '" target="_blank" rel="noopener">' + esc(t.contacto_ig) + '</a>'
       + '<button class="btn" id="pdf">' + esc(t.hero_cta_pdf) + '</button>'
     + '</div>'
-    + '<div class="foot"><span>' + esc(comEmpresa(t.footer_feito)) + '</span><span>' + esc(t.footer_ano) + '</span></div>'
+    + '<div class="foot"><span></span><span>' + esc(t.footer_ano) + '</span></div>'
   + '</div></section>');
 
   $("#main").innerHTML = H.join("");
@@ -379,8 +383,30 @@ function motor(){
   refs.pinbar = $("#pinbar");
   refs.pars   = $$("[data-par]");
   refs.phase  = -1;
-  refs.steps.forEach(function(s){ s.classList.toggle("on", s.dataset.i === "0"); });
-  refs.nums.forEach(function(b){ b.classList.toggle("on", b.dataset.i === "0"); });
+  /* A altura da pista define quanto scroll dura a fixação: uma janela por
+     painel. Em ecrãs estreitos os painéis não cabem no ecrã fixado, por
+     isso a fixação desliga e eles empilham, todos legíveis. */
+  refs.pinned = !RM && window.matchMedia("(min-width:861px)").matches;
+  /* Só fixa se os painéis couberem mesmo no ecrã. Mede-se o conteúdo mais
+     o espaçamento real do palco, com a classe .pin--flat removida para a
+     medição não sair enviesada por um render anterior. */
+  var pin = $(".pin"), palco = $(".pin__stage");
+  if(pin) pin.classList.remove("pin--flat");
+  if(refs.pinned && palco){
+    var cs = getComputedStyle(palco);
+    var preciso = $(".pin__stage .shell").offsetHeight
+                + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+    if(preciso > window.innerHeight) refs.pinned = false;
+  }
+  if(pin) pin.classList.toggle("pin--flat", !refs.pinned);
+  if(refs.track) refs.track.style.height = refs.pinned ? (85 * refs.steps.length) + "svh" : "";
+  if(refs.pinned){
+    refs.steps.forEach(function(s){ s.classList.toggle("on", s.dataset.i === "0"); });
+    refs.nums.forEach(function(b){ b.classList.toggle("on", b.dataset.i === "0"); });
+  } else {
+    refs.steps.forEach(function(s){ s.classList.add("on"); });
+    refs.nums.forEach(function(b){ b.classList.remove("on"); });
+  }
 
   grelha();
   if(!loopOn){ loopOn = true; requestAnimationFrame(frame); }
@@ -483,11 +509,12 @@ function frame(now){
     });
   }
 
-  if(refs.track){
+  if(refs.track && refs.pinned){
     var tr = refs.track.getBoundingClientRect(), span = refs.track.offsetHeight - vh;
     var kp = clamp((-tr.top)/(span>0?span:1), 0, 1);
     if(refs.pinbar) refs.pinbar.style.width = (kp*100) + "%";
-    var ph = kp >= .70 ? 2 : (kp >= .35 ? 1 : 0);
+    var nfases = refs.steps.length;
+    var ph = Math.min(nfases-1, Math.floor(kp*nfases));
     if(ph !== refs.phase){
       refs.phase = ph;
       refs.steps.forEach(function(s){ s.classList.toggle("on", +s.dataset.i === ph); });
