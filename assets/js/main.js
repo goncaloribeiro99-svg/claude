@@ -1,5 +1,5 @@
 /* =========================================================================
-   main.js — render das chapas, idioma, empresa e sistema de animação.
+   main.js: render das chapas, idioma e sistema de animação.
    Conteúdo em data.js; textos da interface em i18n.js.
    ========================================================================= */
 (function(){
@@ -19,10 +19,7 @@ var esc = function(s){
   });
 };
 
-/* ---------- empresa e idioma ---------- */
-var empresaKey = (params.get("e") || "default").toLowerCase();
-var EMPRESA = EMPRESAS[empresaKey] || EMPRESAS.default;
-
+/* ---------- idioma ---------- */
 function idiomaInicial(){
   var q = (params.get("lang")||"").toLowerCase();
   if (LANGS.indexOf(q) >= 0) return q;
@@ -31,17 +28,10 @@ function idiomaInicial(){
 }
 var lang = idiomaInicial();
 
-function marca(){
-  var r = document.documentElement.style;
-  r.setProperty("--accent", EMPRESA.accent);
-  r.setProperty("--accent-hi", EMPRESA.accent2);
-}
-var comEmpresa = function(t){ return String(t).replace(/\{empresa\}/g, EMPRESA.nome); };
-
 /* =========================================================================
    RENDER
    ========================================================================= */
-var PLATES = ["capa","ficha","argumento","percurso","padel","plano","prova","ferramentas","fora","contacto"];
+var PLATES = ["capa","ficha","argumento","percurso","padel","competencias","prova","ferramentas","fora","contacto"];
 
 function num(i){ return (i<10?"0":"") + i; }
 
@@ -55,20 +45,19 @@ function cabeca(i, key, titulo, sub){
 }
 
 function render(){
-  var t = I18N[lang], p = EMPRESA.pitch[lang], plano = EMPRESA.plano[lang];
-  var assunto = encodeURIComponent(t.candidatura + " — " + PROFILE.nome + " — " + EMPRESA.nome);
+  var t = I18N[lang], p = ARGUMENTO[lang], plano = COMPETENCIAS[lang];
+  var assunto = encodeURIComponent(t.candidatura + ": " + PROFILE.nome);
   var mailto = "mailto:" + PROFILE.email + "?subject=" + assunto;
 
   document.documentElement.lang = t.htmlLang;
-  document.title = PROFILE.nome + " — " + t.candidatura + " " + EMPRESA.nomeCurto;
+  document.title = PROFILE.nome + ", " + t.candidatura;
 
-  $("#topId").innerHTML = "<b>" + esc(PROFILE.nome) + "</b> · " + esc(t.candidatura) + " " + esc(EMPRESA.nomeCurto);
+  $("#topId").innerHTML = "<b>" + esc(PROFILE.nome) + "</b> · " + esc(t.hero_kicker);
   var cta = $("#topCta"); cta.textContent = t.hero_cta_falar; cta.href = mailto;
   $$("#langs button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
 
   $("#rail").innerHTML = PLATES.map(function(k,i){
-    var etiqueta = (k === "plano" && EMPRESA.generica) ? t.plates.competencias : t.plates[k];
-    return '<a href="#p' + i + '" data-r="p' + i + '">' + num(i) + " · " + esc(etiqueta).toUpperCase() + '</a>';
+    return '<a href="#p' + i + '" data-r="p' + i + '">' + num(i) + " · " + esc(t.plates[k]).toUpperCase() + '</a>';
   }).join("");
 
   var H = [];
@@ -78,12 +67,12 @@ function render(){
     + '<canvas id="grid" aria-hidden="true"></canvas>'
     + '<div class="shell hero__in">'
       + '<div>'
-        + '<div class="eyebrow rv">' + esc(EMPRESA.generica ? t.hero_kicker_gen : comEmpresa(t.hero_kicker)) + '</div>'
+        + '<div class="eyebrow rv">' + esc(t.hero_kicker) + '</div>'
         + '<h1 class="name"><span class="ln"><i>Gonçalo</i></span><span class="ln"><i class="thin">Ribeiro</i></span></h1>'
         + '<p class="lede rv" data-d="2">' + esc(t.hero_role) + '</p>'
         + '<div class="hero__cta rv" data-d="3">'
           + '<a class="btn btn--solid" id="magnet" href="' + mailto + '">' + esc(t.hero_cta_falar) + '</a>'
-          + '<a class="btn" href="#p2">' + esc(comEmpresa(t.sec_why)) + '</a>'
+          + '<a class="btn" href="#p2">' + esc(t.sec_why) + '</a>'
         + '</div>'
       + '</div>'
       + '<figure class="portrait rv" data-d="1" style="margin:0">'
@@ -108,7 +97,7 @@ function render(){
 
   /* ---- 02 argumento (o 1.º parágrafo acende palavra a palavra) ---- */
   H.push('<section class="plate" id="p2"><div class="shell">'
-    + cabeca(2, "argumento", t.sec_why, EMPRESA.generica ? "" : comEmpresa(t.sec_why_sub))
+    + cabeca(2, "argumento", t.sec_why, "")
     + '<h3 class="claim rv">' + esc(p.titulo) + '</h3>'
     + '<div class="body">'
     + p.paras.map(function(x,i){
@@ -173,9 +162,9 @@ function render(){
     + '<div class="shell" style="width:100%">'
       + '<div class="ph" style="margin-bottom:32px">'
         + '<div class="ph__tag" data-scramble>' + esc(t.chapa) + ' 05 · '
-          + esc(EMPRESA.generica ? t.plates.competencias : t.plates.plano) + '</div>'
+          + esc(t.plates.competencias) + '</div>'
         + '<h2 style="font-size:clamp(1.8rem,4.2vw,3rem)">'
-          + esc(EMPRESA.generica ? t.sec_comp_h2 : comEmpresa(t.sec_plano_h2)) + '</h2>'
+          + esc(t.sec_comp_h2) + '</h2>'
       + '</div>'
       + '<div class="stage">'
         + '<div class="stage__num" id="nums">'
@@ -272,7 +261,7 @@ function motor(){
       io.unobserve(e.target);
     });
   },{ threshold:.15, rootMargin:"0px 0px -8% 0px" });
-  $$(".rv, .fig, .job, .tese, .gal").forEach(function(el){ io.observe(el); });
+  $$(".rv, .fig, .job, .tese, .gal, .plate").forEach(function(el){ io.observe(el); });
   ios.push(io);
 
   /* --- nome a subir por trás da máscara --- */
@@ -321,7 +310,7 @@ function motor(){
   });
 
   /* --- etiquetas que calibram --- */
-  var CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/·—";
+  var CH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/·";
   var ioS = new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting) return;
@@ -333,7 +322,7 @@ function motor(){
         var lock = Math.floor(len * (f/16)), out = "";
         for(var i=0;i<len;i++){
           var c = real[i];
-          out += (i < lock || c === " " || c === "·" || c === "—") ? c : CH[(Math.random()*CH.length)|0];
+          out += (i < lock || c === " " || c === "·") ? c : CH[(Math.random()*CH.length)|0];
         }
         el.textContent = out;
         if(f >= 16){ clearInterval(id); el.textContent = real; }
@@ -383,6 +372,7 @@ function motor(){
   refs.pinbar = $("#pinbar");
   refs.pars   = $$("[data-par]");
   refs.phase  = -1;
+  if(refs.secAnt === undefined) refs.secAnt = -1;
   /* A altura da pista define quanto scroll dura a fixação: uma janela por
      painel. Em ecrãs estreitos os painéis não cabem no ecrã fixado, por
      isso a fixação desliga e eles empilham, todos legíveis. */
@@ -486,6 +476,11 @@ function frame(now){
     if(refs.plates[i] && refs.plates[i].getBoundingClientRect().top <= vh*0.42) cur = i;
   for(i=0;i<refs.rails.length;i++)
     refs.rails[i].setAttribute("aria-current", i === cur ? "true" : "false");
+  if(cur !== refs.secAnt){
+    refs.secAnt = cur;
+    if(window.Bola) Bola.kick();
+  }
+  if(window.Bola) Bola.scroll(sy);
 
   if(refs.rule){
     var tl = refs.rule.parentNode.getBoundingClientRect();
@@ -529,7 +524,11 @@ function frame(now){
 /* ---------- cursor ---------- */
 function cursor(){
   var ring = $("#ring");
-  if(!FINE || RM) return;
+  if(!ring || !FINE || RM) return;
+  /* o retrato vem dos dados para o build de ficheiro único o poder embeber */
+  var foto = document.createElement("img");
+  foto.src = PROFILE.fotoCursor; foto.alt = "";
+  ring.appendChild(foto);
   var rx=0, ry=0, tx=0, ty=0, on=false;
   window.addEventListener("pointermove", function(e){
     tx = e.clientX; ty = e.clientY;
@@ -561,21 +560,11 @@ function trocarIdioma(novo){
 }
 
 /* API para o build de ficheiro único (seletor de empresa no preview) */
-window.__cv = {
-  empresas: function(){ return Object.keys(EMPRESAS); },
-  actual: function(){ return { empresa:empresaKey, lang:lang }; },
-  setEmpresa: function(k){
-    if(!EMPRESAS[k]) return;
-    empresaKey = k; EMPRESA = EMPRESAS[k]; marca();
-    window.scrollTo({ top:0, behavior:"instant" });
-    render();
-  },
-  setLang: trocarIdioma
-};
+window.__cv = { actual: function(){ return { lang:lang }; }, setLang: trocarIdioma };
 
 document.addEventListener("DOMContentLoaded", function(){
-  marca();
   cursor();
+  if(window.Bola) Bola.init();
   $("#langs").addEventListener("click", function(e){
     var b = e.target.closest("button[data-lang]");
     if(b) trocarIdioma(b.dataset.lang);

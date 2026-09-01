@@ -16,6 +16,7 @@ const R = f => fs.readFileSync(path.join(ROOT, f), "utf8");
 /* imagens: caminho no site -> [largura máxima, qualidade] */
 const IMGS = {
   "assets/img/perfil.jpg":         [620, 0.82],
+  "assets/img/cursor.jpg":         [160, 0.85],
   "assets/img/padel.jpg":          [620, 0.80],
   "assets/img/rockin-founder.jpg": [540, 0.72],
   "assets/img/rockin-estadio.jpg": [900, 0.70],
@@ -49,38 +50,19 @@ const IMGS = {
   // o PDF da tese não viaja no ficheiro único; fica só o link do RCAAP
   data = data.replace(/tesePdf:\s*"[^"]*"/, "tesePdf: null");
 
-  const picker = `
-<div class="pick" id="pick">
-  <div class="pick__l" id="pickL">Empresa</div>
-  <div class="pick__row" id="pickRow"></div>
-</div>
-<script>
-(function(){
-  var NOMES = { default:"Genérico", quad:"QUAD", cork:"CORK", vekt:"VEKT", volt:"VOLT" };
-  function pinta(){
-    var cur = window.__cv.actual();
-    document.getElementById("pickL").textContent = I18N[cur.lang].troca_empresa;
-    document.getElementById("pickRow").innerHTML = window.__cv.empresas().map(function(k){
-      return '<button data-e="'+k+'" aria-pressed="'+(k===cur.empresa)+'">'+(NOMES[k]||k)+'</button>';
-    }).join("");
-  }
-  document.getElementById("pickRow").addEventListener("click", function(e){
-    var b = e.target.closest("button[data-e]");
-    if(b){ window.__cv.setEmpresa(b.dataset.e); pinta(); }
-  });
-  document.getElementById("langs").addEventListener("click", function(){ setTimeout(pinta, 0); });
-  window.addEventListener("DOMContentLoaded", function(){ window.__cv.setEmpresa("default"); pinta(); });
-})();
-<\/script>`;
+  const picker = "";  // já não há versões por empresa a alternar
+
 
   const html = R("index.html");
   const head = html.split("<head>")[1].split("</head>")[0];
+  // A meta viewport tem de viajar: sem ela o telemóvel assume 980px de
+  // largura de layout e o site responsivo deixa de o ser.
   const keep = head.split("\n")
-    .filter(l => /fonts\.googleapis|preconnect|rel="icon"/.test(l))
+    .filter(l => /fonts\.googleapis|preconnect|rel="icon"|name="viewport"/.test(l))
     .join("\n");
   // no ficheiro único o título nomeia o preview; o main.js reescreve-o
   // por empresa assim que arranca
-  const titulo = "<title>Quatro Marcas, Um Currículo</title>";
+  const titulo = "<title>Gonçalo Ribeiro</title>";
   const body = html.split("<body>")[1].split("</body>")[0]
     .replace(/<script src="assets\/js\/[^"]+"><\/script>/g, "")
     .trim();
@@ -92,6 +74,7 @@ const IMGS = {
     body,
     "<script>\n" + data + "\n<\/script>",
     "<script>\n" + R("assets/js/i18n.js") + "\n<\/script>",
+    "<script>\n" + R("assets/js/bola.js") + "\n<\/script>",
     "<script>\n" + R("assets/js/main.js") + "\n<\/script>",
     picker
   ].join("\n\n");
