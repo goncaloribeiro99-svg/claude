@@ -1,0 +1,47 @@
+# Publica o site no GitHub Pages a cada push.
+# O passo configure-pages com enablement: true ativa o Pages no repositório
+# na primeira execução, por isso não é preciso mexer em definições à mão.
+name: Publicar site
+
+on:
+  push:
+    branches: [claude/one-scroller-curriculum-site-hlbagz]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicacao.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reunir o que vai para o ar
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -r assets _site/
+          touch _site/.nojekyll
+          echo "Ficheiros publicados:"
+          find _site -type f | sort
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: publicacao
+        uses: actions/deploy-pages@v4
