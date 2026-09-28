@@ -154,6 +154,12 @@ main,.top,.rail{position:relative;z-index:1}
 }
 .btn:hover{color:var(--ground);border-color:var(--accent)}
 .btn:hover::after{transform:translateY(0)}
+/* botão do currículo: contorno de acento, enche-se ao passar o rato */
+.btn--cv{border-color:var(--accent);color:var(--accent)}
+.btn--cv svg{flex:none;margin-right:-2px}
+@media(max-width:860px){.top .btn--cv{display:none}}
+@media print{.btn--cv{display:none}}
+
 .btn--solid{background:var(--accent);border-color:var(--accent);color:var(--ground)}
 .btn--solid::after{background:var(--ink)}
 .btn--solid:hover{color:var(--ground);border-color:var(--ink)}

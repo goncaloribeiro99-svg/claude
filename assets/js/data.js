@@ -20,7 +20,11 @@ const PROFILE = {
   teseTitulo: "Análise dos Motivos de Prática Desportiva e do Nível de Satisfação Intrínseca do Consumidor de Padel Português",
   teseInstituicao: "IPAM, Instituto Português de Administração de Marketing, Porto",
   teseUrl: "https://comum.rcaap.pt/entities/publication/fba10b16-0315-412e-97c7-863eba6212d1",
-  tesePdf: "assets/docs/tese.pdf"
+  tesePdf: "assets/docs/tese.pdf",
+
+  // Currículo em PDF. No build de ficheiro único viaja embebido.
+  cvPdf: "assets/docs/cv-goncalo-ribeiro-en.pdf",
+  cvNome: "Goncalo-Ribeiro-CV.pdf"
 };
 
 /* ---------- Galeria "Fora do campo": Rockin'1000, Estádio de Leiria ---------- */

@@ -50,6 +50,13 @@ const IMGS = {
   // o PDF da tese não viaja no ficheiro único; fica só o link do RCAAP
   data = data.replace(/tesePdf:\s*"[^"]*"/, "tesePdf: null");
 
+  // o CV viaja embebido: o main.js converte-o para blob em execução, porque
+  // o Chrome recusa navegação de topo para um data URI
+  const cvRel = "assets/docs/cv-goncalo-ribeiro-en.pdf";
+  const cvUri = "data:application/pdf;base64,"
+    + fs.readFileSync(path.join(ROOT, cvRel)).toString("base64");
+  data = data.split('"' + cvRel + '"').join(JSON.stringify(cvUri));
+
   const picker = "";  // já não há versões por empresa a alternar
 
 

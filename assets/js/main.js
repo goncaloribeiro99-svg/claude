@@ -7,6 +7,23 @@
 
 var LANGS = ["pt","en","es"];
 var LOCALE = { pt:"pt-PT", en:"en-GB", es:"es-ES" };
+
+/* No build de ficheiro único o CV viaja como data URI, e o Chrome recusa
+   navegar para data: no topo da janela. Converte-se para blob uma vez. */
+var CV_HREF = (function(){
+  var h = PROFILE.cvPdf;
+  if(!h || h.slice(0,5) !== "data:") return h;
+  try {
+    var bin = atob(h.slice(h.indexOf(",") + 1));
+    var arr = new Uint8Array(bin.length);
+    for(var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return URL.createObjectURL(new Blob([arr], { type:"application/pdf" }));
+  } catch(e){ return h; }
+})();
+
+var ICONE_DESC = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+  + ' stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+  + '<path d="M12 3v12M6 11l6 6 6-6M4 21h16"/></svg>';
 var params = new URLSearchParams(location.search);
 var RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 var FINE = window.matchMedia("(pointer:fine)").matches;
@@ -55,6 +72,9 @@ function render(){
 
   $("#topId").innerHTML = "<b>" + esc(PROFILE.nome) + "</b> · " + esc(t.hero_kicker);
   var cta = $("#topCta"); cta.textContent = t.hero_cta_falar; cta.href = mailto;
+  var cv = $("#topCv");
+  cv.innerHTML = ICONE_DESC + esc(t.cta_cv);
+  cv.href = CV_HREF; cv.setAttribute("download", PROFILE.cvNome);
   $$("#langs button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
   $("#langs").setAttribute("aria-label", t.aria_idioma);
   $("#rail").setAttribute("aria-label", t.aria_seccoes);
@@ -75,6 +95,8 @@ function render(){
         + '<p class="lede rv" data-d="2">' + esc(t.hero_role) + '</p>'
         + '<div class="hero__cta rv" data-d="3">'
           + '<a class="btn btn--solid" id="magnet" href="' + mailto + '">' + esc(t.hero_cta_falar) + '</a>'
+          + '<a class="btn btn--cv" href="' + CV_HREF + '" download="' + esc(PROFILE.cvNome) + '"'
+            + ' target="_blank" rel="noopener">' + ICONE_DESC + esc(t.cta_cv) + '</a>'
           + '<a class="btn" href="#p2">' + esc(t.sec_why) + '</a>'
         + '</div>'
       + '</div>'
@@ -565,7 +587,26 @@ function trocarIdioma(novo){
 /* API para o build de ficheiro único (seletor de empresa no preview) */
 window.__cv = { actual: function(){ return { lang:lang }; }, setLang: trocarIdioma };
 
+/* No visor de artefactos um link de download não faz nada: o ficheiro tem de
+   passar pela capacidade "downloads". No site alojado o link simples funciona,
+   por isso só se intercepta o clique quando a capacidade existe. */
+var descarregador = null;
+function ligarDescarga(){
+  if(!window.claude || typeof claude.use !== "function") return;
+  claude.use("downloads").then(function(d){ descarregador = d; }, function(){});
+  document.addEventListener("click", function(e){
+    var alvo = e.target && e.target.closest ? e.target.closest(".btn--cv") : null;
+    if(!alvo || !descarregador) return;
+    e.preventDefault();
+    fetch(alvo.href)
+      .then(function(r){ return r.blob(); })
+      .then(function(blob){ return descarregador.save({ filename: PROFILE.cvNome, data: blob }); })
+      .catch(function(){ /* o visitante recusou, ou a gravação falhou */ });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function(){
+  ligarDescarga();
   cursor();
   if(window.Bola) Bola.init();
   $("#langs").addEventListener("click", function(e){
