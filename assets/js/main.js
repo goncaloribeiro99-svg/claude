@@ -6,6 +6,7 @@
 "use strict";
 
 var LANGS = ["pt","en","es"];
+var LOCALE = { pt:"pt-PT", en:"en-GB", es:"es-ES" };
 var params = new URLSearchParams(location.search);
 var RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 var FINE = window.matchMedia("(pointer:fine)").matches;
@@ -55,6 +56,8 @@ function render(){
   $("#topId").innerHTML = "<b>" + esc(PROFILE.nome) + "</b> · " + esc(t.hero_kicker);
   var cta = $("#topCta"); cta.textContent = t.hero_cta_falar; cta.href = mailto;
   $$("#langs button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+  $("#langs").setAttribute("aria-label", t.aria_idioma);
+  $("#rail").setAttribute("aria-label", t.aria_seccoes);
 
   $("#rail").innerHTML = PLATES.map(function(k,i){
     return '<a href="#p' + i + '" data-r="p' + i + '">' + num(i) + " · " + esc(t.plates[k]).toUpperCase() + '</a>';
@@ -117,12 +120,12 @@ function render(){
     + cabeca(3, "percurso", t.sec_percurso, t.sec_percurso_sub)
     + '<div class="tl"><div class="tl__rule"><i></i></div>'
     + PERCURSO.map(function(j){
-        var quando = j.periodo + (j.periodoFim ? j.periodoFim[lang] : "");
+        var quando = j.periodo[lang] + (j.periodoFim ? j.periodoFim[lang] : "");
         return '<article class="job' + (j.destaque ? " job--now" : "") + '">'
           + '<span class="job__dot"></span>'
           + '<div class="job__hd"><span class="job__co">' + esc(j.empresa) + '</span>'
           + '<span class="job__dt">' + esc(quando) + '</span></div>'
-          + '<div class="job__rl">' + esc(j.cargo[lang]) + ' · ' + esc(j.local) + '</div>'
+          + '<div class="job__rl">' + esc(j.cargo[lang]) + ' · ' + esc(j.local[lang]) + '</div>'
           + '<p class="job__tx">' + esc(j.desc[lang]) + '</p>'
         + '</article>';
       }).join("")
@@ -188,7 +191,7 @@ function render(){
     + cabeca(6, "prova", t.sec_prova, t.sec_prova_sub)
     + '<div class="proof">'
     + PROVA.map(function(x,i){
-        var dentro = '<div class="pcard__k">' + esc(x.kpi) + '</div><p>' + esc(t[x.chave]) + '</p>'
+        var dentro = '<div class="pcard__k">' + esc(x.kpi[lang]) + '</div><p>' + esc(t[x.chave]) + '</p>'
                    + (x.link ? '<span class="pcard__go">' + esc(t.prova_ver) + ' →</span>' : "");
         var attrs = 'class="pcard rv" data-d="' + i + '" data-tilt';
         return x.link ? '<a ' + attrs + ' href="' + x.link + '" target="_blank" rel="noopener">' + dentro + '</a>'
@@ -200,7 +203,7 @@ function render(){
   /* ---- 07 ferramentas ---- */
   H.push('<section class="plate" id="p7"><div class="shell">'
     + cabeca(7, "ferramentas", t.sec_tools)
-    + '<div class="tools rv">' + FERRAMENTAS.map(function(f){ return '<span class="tool">' + esc(f) + '</span>'; }).join("") + '</div>'
+    + '<div class="tools rv">' + FERRAMENTAS[lang].map(function(f){ return '<span class="tool">' + esc(f) + '</span>'; }).join("") + '</div>'
   + '</div></section>');
 
   /* ---- 08 fora do campo ---- */
@@ -284,7 +287,7 @@ function motor(){
       if(!e.isIntersecting) return;
       ioN.unobserve(e.target);
       var el = e.target, to = +el.dataset.to, suf = el.dataset.suf || "", raw = el.dataset.raw === "1";
-      var fmt = function(v){ return raw ? String(v) : v.toLocaleString("pt-PT"); };
+      var fmt = function(v){ return raw ? String(v) : v.toLocaleString(LOCALE[lang]); };
       if(RM){ el.textContent = fmt(to) + suf; return; }
       var st = performance.now();
       (function tick(n){

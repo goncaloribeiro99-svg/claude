@@ -43,89 +43,94 @@ const STATS = [
   { valor: 2020,  sufixo: "",  chave: "stat_padel", raw: true }
 ];
 
-/* ---------- Percurso profissional ---------- */
+/* ---------- Percurso profissional ----------
+   periodo, local e cargo são objetos por idioma: as abreviaturas dos meses
+   e os nomes das cidades mudam de língua. ------------------------------- */
 const PERCURSO = [
   {
     empresa: "Fibrion Health Solutions",
-    periodo: "jun 2023 a ",
+    periodo: { pt: "jun 2023 a ", en: "Jun 2023 to ", es: "jun 2023 a " },
     periodoFim: { pt: "presente", en: "present", es: "presente" },
-    local: "Porto e Gondomar",
+    local: { pt: "Porto e Gondomar", en: "Porto and Gondomar", es: "Oporto y Gondomar" },
     destaque: true,
     cargo: { pt: "Marketing Manager", en: "Marketing Manager", es: "Marketing Manager" },
     desc: {
       pt: "Estruturei a operação de marketing de raiz, numa empresa que começou do zero. Responsável por Marketing, Recursos Humanos e Eventos: publicidade online, planeamento, produção de feiras e supervisão de stands.",
       en: "I built the marketing operation from the ground up at a company starting from zero. Responsible for Marketing, HR and Events: online advertising, planning, trade show production and booth supervision.",
       es: "Estructuré la operación de marketing desde cero, en una empresa que empezaba de cero. Responsable de Marketing, Recursos Humanos y Eventos: publicidad online, planificación, producción de ferias y supervisión de stands."
-    },
-    tags: ["Meta Ads", "Eventos e feiras", "Recursos Humanos", "Go-to-market"]
+    }
   },
   {
     empresa: "Padel Home",
-    periodo: "2026 a ",
+    periodo: { pt: "2026 a ", en: "2026 to ", es: "2026 a " },
     periodoFim: { pt: "presente", en: "present", es: "presente" },
-    local: "Porto",
+    local: { pt: "Porto", en: "Porto", es: "Oporto" },
     destaque: true,
     cargo: { pt: "Marketing em regime freelance, academia de padel", en: "Freelance marketing, padel academy", es: "Marketing freelance, academia de pádel" },
     desc: {
       pt: "Academia de padel nova. Construí a presença digital do zero: posicionamento, linha editorial e produção de vídeo. Um vídeo alcançou 13 mil visualizações com a conta a ter apenas um mês.",
       en: "A brand new padel academy. I built the digital presence from zero: positioning, editorial line and video production. One video reached 13 thousand views with the account only a month old.",
       es: "Academia de pádel nueva. Construí la presencia digital desde cero: posicionamiento, línea editorial y producción de vídeo. Un vídeo alcanzó 13 mil visualizaciones con la cuenta con solo un mes."
-    },
-    tags: ["Conteúdo", "Vídeo", "Padel"]
+    }
   },
   {
     empresa: "Padel Nuestro Portugal",
-    periodo: "fev 2025 a abr 2026",
-    local: "Porto",
+    periodo: { pt: "fev 2025 a abr 2026", en: "Feb 2025 to Apr 2026", es: "feb 2025 a abr 2026" },
+    local: { pt: "Porto", en: "Porto", es: "Oporto" },
     destaque: true,
     cargo: { pt: "Content Manager", en: "Content Manager", es: "Content Manager" },
     desc: {
       pt: "Responsável pela criação de conteúdo nas redes sociais do maior retalhista especializado em padel. Conteúdo de loja, de produto e de comunidade. O que funciona, funciona porque é sobre o jogo e não sobre o catálogo.",
       en: "Responsible for social media content for the largest padel specialist retailer. Store, product and community content. What works, works because it is about the game and not about the catalogue.",
       es: "Responsable de la creación de contenido en las redes sociales del mayor retailer especializado en pádel. Contenido de tienda, de producto y de comunidad. Lo que funciona, funciona porque va del juego y no del catálogo."
-    },
-    tags: ["Copywriting", "Redes sociais", "Retalho de padel"]
+    }
   },
   {
     empresa: "MSO Medical Solutions",
-    periodo: "fev 2023 a jun 2023",
-    local: "Aveiro",
+    periodo: { pt: "fev 2023 a jun 2023", en: "Feb 2023 to Jun 2023", es: "feb 2023 a jun 2023" },
+    local: { pt: "Aveiro", en: "Aveiro", es: "Aveiro" },
     cargo: { pt: "Product Marketer, estágio", en: "Product Marketer, internship", es: "Product Marketer, prácticas" },
     desc: {
       pt: "Marketing de produto num ambiente técnico e regulado: posicionamento, materiais de apoio à venda e estratégia de produto.",
       en: "Product marketing in a technical, regulated environment: positioning, sales support materials and product strategy.",
       es: "Marketing de producto en un entorno técnico y regulado: posicionamiento, materiales de apoyo a la venta y estrategia de producto."
-    },
-    tags: ["Estratégia de produto"]
+    }
   },
   {
     empresa: "CPMPharma",
-    periodo: "abr 2020 a set 2020",
-    local: "Porto",
+    periodo: { pt: "abr 2020 a set 2020", en: "Apr 2020 to Sep 2020", es: "abr 2020 a sep 2020" },
+    local: { pt: "Porto", en: "Porto", es: "Oporto" },
     cargo: { pt: "Marketing, aprendiz", en: "Marketing, apprentice", es: "Marketing, aprendiz" },
     desc: {
       pt: "Primeira passagem por marketing: estratégia de produto e apoio à operação comercial.",
       en: "First step into marketing: product strategy and commercial support.",
       es: "Primer paso en marketing: estrategia de producto y apoyo a la operación comercial."
-    },
-    tags: []
+    }
   }
 ];
 
 /* ---------- Portefólio de projetos ---------- */
 const PROVA = [
-  { kpi: "25 000+",       chave: "prova_1", link: null },
-  { kpi: "13 000",        chave: "prova_2", link: "https://www.instagram.com/padelhomept/" },
-  { kpi: "Padel Nuestro", chave: "prova_3", link: "https://www.instagram.com/reel/DVZVAviDmRg/" }
+  { kpi: { pt: "25 000+", en: "25,000+", es: "25.000+" }, chave: "prova_1", link: null },
+  { kpi: { pt: "13 000",  en: "13,000",  es: "13.000"  }, chave: "prova_2", link: "https://www.instagram.com/padelhomept/" },
+  { kpi: { pt: "Padel Nuestro", en: "Padel Nuestro", es: "Padel Nuestro" }, chave: "prova_3", link: "https://www.instagram.com/reel/DVZVAviDmRg/" }
 ];
 
 /* ---------- Ferramentas ---------- */
-const FERRAMENTAS = [
-  "Meta Ads", "Canva", "Microsoft 365", "AI Agents (Claude)",
-  "SEO e Google", "Produção de vídeo (Adobe)", "Copywriting",
-  "Gestão de eventos e feiras", "Recrutamento e Recursos Humanos",
-  "Go-to-market do zero"
-];
+const FERRAMENTAS = {
+  pt: ["Meta Ads", "Canva", "Microsoft 365", "AI Agents (Claude)",
+       "SEO e Google", "Produção de vídeo (Adobe)", "Copywriting",
+       "Gestão de eventos e feiras", "Recrutamento e Recursos Humanos",
+       "Go-to-market do zero"],
+  en: ["Meta Ads", "Canva", "Microsoft 365", "AI Agents (Claude)",
+       "SEO and Google", "Video production (Adobe)", "Copywriting",
+       "Event and trade show management", "Recruitment and HR",
+       "Go-to-market from zero"],
+  es: ["Meta Ads", "Canva", "Microsoft 365", "AI Agents (Claude)",
+       "SEO y Google", "Producción de vídeo (Adobe)", "Copywriting",
+       "Gestión de eventos y ferias", "Reclutamiento y Recursos Humanos",
+       "Go-to-market desde cero"]
+};
 
 /* ---------- Parte 02: o argumento ---------- */
 const ARGUMENTO = {
