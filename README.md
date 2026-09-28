@@ -104,14 +104,51 @@ Junta CSS, JS e imagens (em data URI) num só ficheiro autónomo.
 
 ---
 
-## Publicar
+## Publicar num domínio próprio
 
-**GitHub Pages**: Settings, Pages, Source `Deploy from a branch`, e escolhe
-o branch com a pasta `/root`.
+O site é estático: um `index.html` e a pasta `assets`. Não há build, não há
+servidor. Funciona em qualquer alojamento, e todos os caminhos são
+relativos, por isso corre tanto na raiz de um domínio como num subcaminho.
 
-**Netlify ou Vercel**: arrasta a pasta. Não há build.
+### GitHub Pages, já preparado
 
----
+O workflow `.github/workflows/pages.yml` reúne o `index.html` e a pasta
+`assets` e publica-os a cada push. Falta um passo que só o dono do
+repositório pode dar, porque a API que cria o site Pages não aceita o token
+do workflow:
+
+> **Settings → Pages → Source: `GitHub Actions` → Save**
+
+Feito isso, corre o workflow no separador Actions (ou faz qualquer push) e o
+site fica em:
+
+```
+https://goncaloribeiro99-svg.github.io/claude/
+```
+
+A partir daí cada push republica sozinho.
+
+### Domínio próprio
+
+Com um domínio comprado, em Settings → Pages → Custom domain. Depois é
+preciso mudar duas linhas no `index.html`, as etiquetas `og:url` e
+`og:image`, que têm de apontar para o domínio novo em absoluto: os leitores
+de pré-visualização não resolvem caminhos relativos de forma fiável.
+
+### Outro alojamento
+
+Netlify, Vercel, Cloudflare Pages ou qualquer servidor estático: arrasta a
+pasta com o `index.html` e o `assets`. Nada mais é preciso.
+
+## O currículo em PDF
+
+Está em `assets/docs/` e o caminho vive no `data.js`. O botão usa um link
+normal com o atributo `download`, que funciona em qualquer alojamento.
+
+Dentro do visor de artefactos do Claude esse link não funciona, porque o
+visor não dá permissão de descarga às páginas. Por isso o `main.js` deteta
+a capacidade `downloads` e, quando ela existe, entrega o ficheiro por essa
+via. No alojamento normal esse caminho nunca é usado.
 
 ## PDF
 
