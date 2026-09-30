@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Certificado Trusted Quality</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  :root {
+    --vinho: #8e1f45;
+    --framboesa: #c8385f;
+    --rosa: #e0407f;
+    --rosa-claro: #f0a3b8;
+    --texto: #201820;
+    --cinza: #585050;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1754px; height: 1240px; background: #fff; }
+  body { font-family: "Montserrat", sans-serif; color: var(--texto); position: relative; overflow: hidden; }
+
+  .logo { position: absolute; top: 34px; left: 50%; transform: translateX(-50%); width: 210px; }
+
+  .fundacao {
+    position: absolute; top: 168px; left: 195px; right: 195px;
+    font-family: "Josefin Sans", sans-serif; font-weight: 300;
+    font-size: 52px; letter-spacing: 22px; padding-left: 22px; text-align: center; color: var(--texto);
+    padding-bottom: 20px; border-bottom: 2px solid var(--texto);
+    white-space: nowrap;
+  }
+
+  .titulo {
+    position: absolute; top: 290px; left: 0; right: 0; text-align: center;
+    font-weight: 800; font-size: 74px; line-height: 1.02; letter-spacing: 9px;
+    color: var(--vinho);
+  }
+
+  .centro { position: absolute; left: 0; right: 0; text-align: center; }
+  .pequeno { font-size: 26px; font-weight: 400; letter-spacing: .5px; }
+  .nome { font-size: 50px; font-weight: 700; color: var(--framboesa); }
+
+  .selo { position: absolute; top: 400px; left: 1205px; width: 340px; height: 340px; }
+
+  .criterios {
+    position: absolute; top: 770px; left: 0; right: 0; text-align: center;
+    font-size: 25px; line-height: 1.3; letter-spacing: .4px;
+  }
+  .data { position: absolute; top: 862px; left: 0; right: 0; text-align: center; font-size: 25px; }
+
+  .assinaturas { position: absolute; top: 1000px; left: 120px; right: 120px; display: flex; justify-content: space-between; }
+  .assinatura { width: 500px; text-align: center; font-size: 21px; color: var(--texto); line-height: 1.55; }
+  .assinatura .linha { height: 2px; background: var(--cinza); margin: 0 30px 10px; opacity: .6; }
+  .assinatura b { font-weight: 500; }
+
+  .barra { position: absolute; left: 190px; right: 190px; top: 1152px; height: 10px; display: flex; }
+  .barra span { flex: 1; }
+
+  .nota {
+    position: absolute; left: 0; right: 0; top: 1186px; text-align: center;
+    font-size: 15px; color: var(--cinza); letter-spacing: .3px;
+  }
+</style>
+</head>
+<body>
+  <img class="logo" src="logo-previdencia-familiar-porto.png" alt="Previdência Familiar do Porto">
+
+  <div class="fundacao">CLEAN IMPLANT FOUNDATION</div>
+
+  <div class="titulo">TRUSTED QUALITY<br>2026-2027</div>
+
+  <div class="centro pequeno" style="top: 478px">This certificate is awarded to</div>
+  <div class="centro nome" style="top: 514px">Dentis Co., Ltd.</div>
+  <div class="centro pequeno" style="top: 600px">for the dental implant</div>
+  <div class="centro nome" style="top: 636px">AXEL s-Clean SQ-SL</div>
+
+  <svg class="selo" viewBox="0 0 340 340" aria-label="Selo Trusted Quality 2026-2027">
+    <defs>
+      <path id="arco-topo" d="M 58 238 A 128 128 0 1 1 282 238" />
+      <path id="arco-base" d="M 62 196 A 112 112 0 0 0 278 196" />
+      <filter id="sombra" x="-10%" y="-10%" width="120%" height="120%">
+        <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#8e1f45" flood-opacity=".22"/>
+      </filter>
+    </defs>
+    <circle cx="170" cy="170" r="160" fill="#fff" stroke="#8e1f45" stroke-width="2.5" filter="url(#sombra)"/>
+    <circle cx="170" cy="170" r="150" fill="none" stroke="#f0a3b8" stroke-width="1"/>
+    <text font-family="Josefin Sans" font-size="20" letter-spacing="6" fill="#8e1f45">
+      <textPath href="#arco-topo" startOffset="50%" text-anchor="middle">TRUSTED QUALITY 2026-2027</textPath>
+    </text>
+    <text x="170" y="172" text-anchor="middle" font-family="Josefin Sans" font-size="46" letter-spacing="5" fill="#201820">CLEAN</text>
+    <text x="170" y="204" text-anchor="middle" font-family="Josefin Sans" font-size="24" letter-spacing="5" fill="#201820">IMPLANT</text>
+    <path d="M 128 222 Q 170 246 212 222" fill="none" stroke="#c8385f" stroke-width="5" stroke-linecap="round"/>
+    <text font-family="Montserrat" font-weight="500" font-size="15" letter-spacing="1" fill="#c8385f">
+      <textPath href="#arco-base" startOffset="50%" text-anchor="middle">DENTIS · AXEL s-clean SQ-SL</textPath>
+    </text>
+  </svg>
+
+  <div class="criterios">
+    The aforesaid implant complies with the CleanImplant Quality Mark Criteria according to<br>
+    the CleanImplant Guideline (revised 2025) and consensus recommendation of the Scientific Advisory Board.
+  </div>
+  <div class="data">Berlin, September 5<sup style="font-size:15px">th</sup>, 2026</div>
+
+  <div class="assinaturas">
+    <div class="assinatura"><div class="linha"></div><b>Dr. Amit Patel BDS MSc MClinDent FDS RCSEd</b><br>CleanImplant Scientific Advisory Board</div>
+    <div class="assinatura" style="width:470px"><div class="linha"></div><b>Dr. Luigi Canullo, PhD</b><br>CleanImplant Scientific Advisory Board</div>
+    <div class="assinatura"><div class="linha"></div><b>Dr. Dirk U. Duddeck</b><br>Managing Director CleanImplant Foundation</div>
+  </div>
+
+  <div class="barra">
+    <span style="background:var(--vinho)"></span>
+    <span style="background:var(--framboesa)"></span>
+    <span style="background:var(--rosa)"></span>
+    <span style="background:var(--rosa-claro)"></span>
+  </div>
+
+  <div class="nota">Reprodução informativa do certificado emitido pela CleanImplant Foundation. O documento original, assinado, está disponível mediante pedido.</div>
+</body>
+</html>
