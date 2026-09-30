@@ -15,9 +15,6 @@ const pecas = [
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(400);
     await page.screenshot({ path: path.join(__dirname, p.png) });
-    if (p.png.startsWith("certificado")) {
-      await page.pdf({ path: path.join(__dirname, p.png.replace(".png", ".pdf")), width: p.w + "px", height: p.h + "px", printBackground: true });
-    }
     await page.close();
   }
   await browser.close();
